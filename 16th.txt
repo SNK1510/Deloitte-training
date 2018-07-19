@@ -1,0 +1,873 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jul 16 01:48:25 2018
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> create table student
+  2  (
+  3  select concat('hello','world') from dual;
+select concat('hello','world') from dual
+*
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> select concat('hello','world') from DUAL;
+
+CONCAT('HE
+----------
+helloworld
+
+SQL> select SUBSTR('helloworld',1,5) from DUAL;
+
+SUBST
+-----
+hello
+
+SQL> select LENGTH('helloworld') from DUAL;
+
+LENGTH('HELLOWORLD')
+--------------------
+                  10
+
+SQL> select INSTR('helloworld',W) from DUAL;
+select INSTR('helloworld',W) from DUAL
+                          *
+ERROR at line 1:
+ORA-00904: "W": invalid identifier
+
+
+SQL> select INSTR('helloworld',w) from DUAL;
+select INSTR('helloworld',w) from DUAL
+                          *
+ERROR at line 1:
+ORA-00904: "W": invalid identifier
+
+
+SQL> select INSTR('helloworld','w') from DUAL;
+
+INSTR('HELLOWORLD','W')
+-----------------------
+                      6
+
+SQL> select lpad(salary,10,*) from DUAL;
+select lpad(salary,10,*) from DUAL
+                      *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select trim('h','hello') from DUAL;
+select trim('h','hello') from DUAL
+               *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select trim('h'FROM 'hello') from DUAL;
+
+TRIM
+----
+ello
+
+SQL> SELECT SYSDATE FROM SYS.DUAL;
+
+SYSDATE
+---------
+16-JUL-18
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE
+---------
+16-JUL-18
+
+SQL> CREATE TABLE STUDENT
+  2  (
+  3    sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  )
+  8  ,
+  9  select *from STUDENT
+ 10  select *from STUDENT;
+,
+*
+ERROR at line 8:
+ORA-00922: missing or invalid option
+
+
+SQL> CREATE TABLE STUDENT
+  2    2  (
+  3    3    sid char(5),
+  4    4  sname varchar(20),
+  5    5  dob date,
+  6    6  doj date
+  7    7  )
+  8    8  ,
+  9    9  select *from STUDENT
+ 10  CREATE TABLE STUDENT
+ 11    2    2  (
+ 12    3    3    sid char(5),
+ 13    4    4  sname varchar(20),
+ 14    5    5  dob date,
+ 15    6    6  doj date
+ 16    7    7  );
+  2  (
+  *
+ERROR at line 2:
+ORA-00922: missing or invalid option
+
+
+SQL> create table student
+  2  (
+  3     sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  ),
+  8
+SQL> SQL> create table student
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SQL>   2  (
+SQL>   3     sid char(5),
+SQL>   4  sname varchar(20),
+SQL>   5  dob date,
+SQL>   6  doj date,
+SQL> )
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL>
+SQL> SQL> create table student
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL>   2  (
+SQL>   3     sid char(5),
+SQL>   4  sname varchar(20),
+SQL>   5  dob date,
+SQL>   6  doj date,);
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> create table student
+  2  (
+  3    sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  SQL> create table student
+  7    2  (
+  8    3     sid char(5),
+  9    4  sname varchar(20),
+ 10    5  dob date,
+ 11    6  doj date,
+ 12  create table student
+ 13  (
+ 14    sid char(5),
+ 15  sname varchar(20),
+ 16  dob date,
+ 17  doj date,
+ 18  );
+SQL> create table student
+   *
+ERROR at line 6:
+ORA-00902: invalid datatype
+
+
+SQL> create table student1
+  2  (
+  3  sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date,
+  7  );
+)
+*
+ERROR at line 7:
+ORA-00904: : invalid identifier
+
+
+SQL> create table stud
+  2  (
+  3  sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  );
+
+Table created.
+
+SQL> insert into stud values('1234','deeed','12-Jan-12','14-Feb-23');
+
+1 row created.
+
+SQL> insert into stud values('1224','sdeeed','11-Jan-12','14-Oct-56');
+
+1 row created.
+
+SQL> select *from stud;
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1234  deeed                12-JAN-12 14-FEB-23
+1224  sdeeed               11-JAN-12 14-OCT-56
+
+SQL> insert into stud values('1222','sdeeed','11/1/12','14-Oct-56');
+insert into stud values('1222','sdeeed','11/1/12','14-Oct-56')
+                                        *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into stud values('2222','eeee',to_date('11/02/15','dd/mm/yyyy'),to_date('02/02/15','mm/dd/yyyy'));
+
+1 row created.
+
+SQL> select *from stud;
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1234  deeed                12-JAN-12 14-FEB-23
+1224  sdeeed               11-JAN-12 14-OCT-56
+2222  eeee                 11-FEB-15 02-FEB-15
+
+SQL> select MONTHS_BETWEEN(dob,doj)/12 from stud;
+
+MONTHS_BETWEEN(DOB,DOJ)/12
+--------------------------
+                 -11.08871
+                55.2419355
+                .024193548
+
+SQL> select MONTHS_BETWEEN(doj,dob)/12 from stud;
+
+MONTHS_BETWEEN(DOJ,DOB)/12
+--------------------------
+                11.0887097
+                -55.241935
+                -.02419355
+
+SQL> select last_day('01-FEB-07');
+select last_day('01-FEB-07')
+                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select last_day('01-FEB-07') FROM DUAL;
+
+LAST_DAY(
+---------
+28-FEB-07
+
+SQL> SELECT MONTHS_BETWEEN('15-OCT-96',SYSDATE) FROM DUAL;
+
+MONTHS_BETWEEN('15-OCT-96',SYSDATE)
+-----------------------------------
+                         -261.03577
+
+
+
+
+
+
+
+
+
+
+
+ASSIGNMENT !!!
+EMPLOYEEADDRESS LIKE '%a'
+
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jul 16 01:48:25 2018
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> create table student
+  2  (
+  3  select concat('hello','world') from dual;
+select concat('hello','world') from dual
+*
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> select concat('hello','world') from DUAL;
+
+CONCAT('HE
+----------
+helloworld
+
+SQL> select SUBSTR('helloworld',1,5) from DUAL;
+
+SUBST
+-----
+hello
+
+SQL> select LENGTH('helloworld') from DUAL;
+
+LENGTH('HELLOWORLD')
+--------------------
+                  10
+
+SQL> select INSTR('helloworld',W) from DUAL;
+select INSTR('helloworld',W) from DUAL
+                          *
+ERROR at line 1:
+ORA-00904: "W": invalid identifier
+
+
+SQL> select INSTR('helloworld',w) from DUAL;
+select INSTR('helloworld',w) from DUAL
+                          *
+ERROR at line 1:
+ORA-00904: "W": invalid identifier
+
+
+SQL> select INSTR('helloworld','w') from DUAL;
+
+INSTR('HELLOWORLD','W')
+-----------------------
+                      6
+
+SQL> select lpad(salary,10,*) from DUAL;
+select lpad(salary,10,*) from DUAL
+                      *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select trim('h','hello') from DUAL;
+select trim('h','hello') from DUAL
+               *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select trim('h'FROM 'hello') from DUAL;
+
+TRIM
+----
+ello
+
+SQL> SELECT SYSDATE FROM SYS.DUAL;
+
+SYSDATE
+---------
+16-JUL-18
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE
+---------
+16-JUL-18
+
+SQL> CREATE TABLE STUDENT
+  2  (
+  3    sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  )
+  8  ,
+  9  select *from STUDENT
+ 10  select *from STUDENT;
+,
+*
+ERROR at line 8:
+ORA-00922: missing or invalid option
+
+
+SQL> CREATE TABLE STUDENT
+  2    2  (
+  3    3    sid char(5),
+  4    4  sname varchar(20),
+  5    5  dob date,
+  6    6  doj date
+  7    7  )
+  8    8  ,
+  9    9  select *from STUDENT
+ 10  CREATE TABLE STUDENT
+ 11    2    2  (
+ 12    3    3    sid char(5),
+ 13    4    4  sname varchar(20),
+ 14    5    5  dob date,
+ 15    6    6  doj date
+ 16    7    7  );
+  2  (
+  *
+ERROR at line 2:
+ORA-00922: missing or invalid option
+
+
+SQL> create table student
+  2  (
+  3     sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  ),
+  8
+SQL> SQL> create table student
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SQL>   2  (
+SQL>   3     sid char(5),
+SQL>   4  sname varchar(20),
+SQL>   5  dob date,
+SQL>   6  doj date,
+SQL> )
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL>
+SQL> SQL> create table student
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL>   2  (
+SQL>   3     sid char(5),
+SQL>   4  sname varchar(20),
+SQL>   5  dob date,
+SQL>   6  doj date,);
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> create table student
+  2  (
+  3    sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  SQL> create table student
+  7    2  (
+  8    3     sid char(5),
+  9    4  sname varchar(20),
+ 10    5  dob date,
+ 11    6  doj date,
+ 12  create table student
+ 13  (
+ 14    sid char(5),
+ 15  sname varchar(20),
+ 16  dob date,
+ 17  doj date,
+ 18  );
+SQL> create table student
+   *
+ERROR at line 6:
+ORA-00902: invalid datatype
+
+
+SQL> create table student1
+  2  (
+  3  sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date,
+  7  );
+)
+*
+ERROR at line 7:
+ORA-00904: : invalid identifier
+
+
+SQL> create table stud
+  2  (
+  3  sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  );
+
+Table created.
+
+SQL> insert into stud values('1234','deeed','12-Jan-12','14-Feb-23');
+
+1 row created.
+
+SQL> insert into stud values('1224','sdeeed','11-Jan-12','14-Oct-56');
+
+1 row created.
+
+SQL> select *from stud;
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1234  deeed                12-JAN-12 14-FEB-23
+1224  sdeeed               11-JAN-12 14-OCT-56
+
+SQL> insert into stud values('1222','sdeeed','11/1/12','14-Oct-56');
+insert into stud values('1222','sdeeed','11/1/12','14-Oct-56')
+                                        *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into stud values('2222','eeee',to_date('11/02/15','dd/mm/yyyy'),to_date('02/02/15','mm/dd/yyyy'));
+
+1 row created.
+
+SQL> select *from stud;
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1234  deeed                12-JAN-12 14-FEB-23
+1224  sdeeed               11-JAN-12 14-OCT-56
+2222  eeee                 11-FEB-15 02-FEB-15
+
+SQL> select MONTHS_BETWEEN(dob,doj)/12 from stud;
+
+MONTHS_BETWEEN(DOB,DOJ)/12
+--------------------------
+                 -11.08871
+                55.2419355
+                .024193548
+
+SQL> select MONTHS_BETWEEN(doj,dob)/12 from stud;
+
+MONTHS_BETWEEN(DOJ,DOB)/12
+--------------------------
+                11.0887097
+                -55.241935
+                -.02419355
+
+SQL> select last_day('01-FEB-07');
+select last_day('01-FEB-07')
+                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select last_day('01-FEB-07') FROM DUAL;
+
+LAST_DAY(
+---------
+28-FEB-07
+
+SQL> SELECT MONTHS_BETWEEN('15-OCT-96',SYSDATE) FROM DUAL;
+
+MONTHS_BETWEEN('15-OCT-96',SYSDATE)
+-----------------------------------
+                         -261.03577
+
+SQL> SELECT MONTHS_BETWEEN('15-OCT-96',SYSDATE)/12 FROM DUAL;
+
+MONTHS_BETWEEN('15-OCT-96',SYSDATE)/12
+--------------------------------------
+                            -21.752983
+
+SQL> insert into stud values(null,'eeee',to_date('11/02/15','dd/mm/yyyy'),to_date('02/02/15','mm/dd/yyyy'));
+
+1 row created.
+
+SQL> create table marks
+  2  (
+  3    marks varchar(20);
+  marks varchar(20)
+                  *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table marks1
+  2  (
+  3    marks varchar(20),
+  4    address varchar(20),
+  5   name varchar(20)
+  6  );
+
+Table created.
+
+SQL> insert into marks1 values('21','chennai','hh');
+
+1 row created.
+
+SQL> insert into marks1 values('24','chennai','hwh');
+
+1 row created.
+
+SQL> insert into marks1 values('22','Mumbai','heeeh');
+
+1 row created.
+
+SQL> insert into marks1 values('25','Jaipur','hnnnnwh');
+
+1 row created.
+
+SQL> select *from marks1;
+
+MARKS                ADDRESS              NAME
+-------------------- -------------------- --------------------
+21                   chennai              hh
+24                   chennai              hwh
+22                   Mumbai               heeeh
+25                   Jaipur               hnnnnwh
+
+SQL> create table student2
+  2  (
+  3   roll varchar(10) primary key,
+  4  name varchar(20) not null,
+  5  address varchar(20) check (address in('Chennai','Mumbai','Kolkata')),
+  6  Marks number check (Marks between 0 and 100)
+  7  );
+
+Table created.
+
+SQL> insert into student2 values('1',A','Mumbai',98);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into student2 values('1','A','Mumbai',98);
+
+1 row created.
+
+SQL> insert into student2 values('1',A','Mumbai',98);\
+  2  insert into student2 values('1',A','Mumbai',98);
+insert into student2 values('1',A','Mumbai',98);\
+                                 *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into student2 values('1',A','Mumbai',98);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into student2 values('1','A','Mumbai',98);
+insert into student2 values('1','A','Mumbai',98)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.SYS_C0011102) violated
+
+
+
+SQL> create table loan_payment
+  2  (
+  3    loanno number(4) constraint myloanconstraint primary key,
+  4  loan_status varchar2(10) constraint loanstatuscons check (loan_status=upper(loan_status)),
+  5  loan_amount number(10) not null,
+  6  update_date date default SYSDATE,
+  7  product_key varchar2(5)
+  8  );
+
+Table created.
+
+SQL> create table Employee
+  2  (
+  3    EmployeeID varchar(20),
+  4    EmployeeName varchar(20);
+  EmployeeName varchar(20)
+                         *
+ERROR at line 4:
+ORA-00907: missing right parenthesis
+
+
+SQL> EmployeeName varchar(20),
+SP2-0734: unknown command beginning "EmployeeNa..." - rest of line ignored.
+SQL> create table Employee1
+  2  (
+  3    EmployeeID varchar(20),
+  4    EmployeeName varchar(20),
+  5    EmployeeAddress varchar(20),
+  6    DOB date,
+  7    DOJ date,
+  8    Salary varchar(20)
+  9  );
+
+Table created.
+
+SQL> insert into Employee1 values('1111','Sam','Mumbai',to_date('12/10/96','dd/mm/yyyy'),to_date('11/10/2016','dd/mm/yyyy'),12000);
+
+1 row created.
+
+SQL> insert into Employee1 values('2222','Teja','Jaipur',to_date('22/03/91','dd/mm/yyyy'),to_date('15/11/2018','dd/mm/yyyy'),112000);
+
+1 row created.
+
+SQL> insert into Employee1 values('3333','Bhanu','Bangalore',to_date('18/04/88','dd/mm/yyyy'),to_date('15/03/2009','dd/mm/yyyy'),90000);
+
+1 row created.
+
+SQL> insert into Employee1 values('4444','Ganesh','Mangalore',to_date('11/04/21','dd/mm/yyyy'),to_date('02/01/2050','dd/mm/yyyy'),19000);
+
+1 row created.
+
+SQL> insert into Employee1 values('5555','Chethan','Lucknow',to_date('18/12/97','dd/mm/yyyy'),to_date('11/08/2034','dd/mm/yyyy'),229000);
+
+1 row created.
+
+SQL> select *from Employee1;
+
+EMPLOYEEID           EMPLOYEENAME         EMPLOYEEADDRESS      DOB
+-------------------- -------------------- -------------------- ---------
+DOJ       SALARY
+--------- --------------------
+1111                 Sam                  Mumbai               12-OCT-96
+11-OCT-16 12000
+
+2222                 Teja                 Jaipur               22-MAR-91
+15-NOV-18 112000
+
+3333                 Bhanu                Bangalore            18-APR-88
+15-MAR-09 90000
+
+
+EMPLOYEEID           EMPLOYEENAME         EMPLOYEEADDRESS      DOB
+-------------------- -------------------- -------------------- ---------
+DOJ       SALARY
+--------- --------------------
+4444                 Ganesh               Mangalore            11-APR-21
+02-JAN-50 19000
+
+5555                 Chethan              Lucknow              18-DEC-97
+11-AUG-34 229000
+
+
+SQL> select EMPLOYEENAME WHERE SALARY>20000;
+select EMPLOYEENAME WHERE SALARY>20000
+                    *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select EMPLOYEENAME FROM EMPLOYEE1 WHERE SALARY>20000;
+
+EMPLOYEENAME
+--------------------
+Teja
+Bhanu
+Chethan
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' or '%p' or '%r';
+SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' or '%p' or '%r'
+                                                                           *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' OR '%p' OR '%r';
+SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' OR '%p' OR '%r'
+                                                                           *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE ('%a' OR '%p' OR '%r');
+SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE ('%a' OR '%p' OR '%r')
+                                                                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE('%a' OR '%p' OR '%r');
+SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE('%a' OR '%p' OR '%r')
+                                                                   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%[apr]';
+
+no rows selected
+
+SQL> update Employee1 SET SALARY=SALARY*1.2 ;
+
+5 rows updated.
+
+SQL> SELECT *FROM EMPLOYEE1;
+
+EMPLOYEEID           EMPLOYEENAME         EMPLOYEEADDRESS      DOB
+-------------------- -------------------- -------------------- ---------
+DOJ       SALARY
+--------- --------------------
+1111                 Sam                  Mumbai               12-OCT-96
+11-OCT-16 14400
+
+2222                 Teja                 Jaipur               22-MAR-91
+15-NOV-18 134400
+
+3333                 Bhanu                Bangalore            18-APR-88
+15-MAR-09 108000
+
+
+EMPLOYEEID           EMPLOYEENAME         EMPLOYEEADDRESS      DOB
+-------------------- -------------------- -------------------- ---------
+DOJ       SALARY
+--------- --------------------
+4444                 Ganesh               Mangalore            11-APR-21
+02-JAN-50 22800
+
+5555                 Chethan              Lucknow              18-DEC-97
+11-AUG-34 274800
+
+
+SQL> DELETE FROM EMPLOYEE1 WHERE SALARY<5000;
+
+0 rows deleted.
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '^Z^Z';
+
+  2
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' or EMPLOYEEADDRESS LIKE '%p' EMPLOYEEADDRESS LIKE '%r';
+SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' or EMPLOYEEADDRESS LIKE '%p' EMPLOYEEADDRESS LIKE '%r'
+                                                                                                *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE1 WHERE EMPLOYEEADDRESS LIKE '%a' or EMPLOYEEADDRESS LIKE '%p' or  EMPLOYEEADDRESS LIKE '%r';
+
+EMPLOYEENAME
+--------------------
+Teja
+
+SQL> update Employee1 SET salary='3000' where EMPLOYEEID='1111';
+
+1 row updated.
+
+SQL> DELETE FROM EMPLOYEE1 WHERE SALARY<5000;
+
+1 row deleted.
+
+SQL> SELECT *FROM EMPLOYEE1;
+
+EMPLOYEEID           EMPLOYEENAME         EMPLOYEEADDRESS      DOB
+-------------------- -------------------- -------------------- ---------
+DOJ       SALARY
+--------- --------------------
+2222                 Teja                 Jaipur               22-MAR-91
+15-NOV-18 134400
+
+3333                 Bhanu                Bangalore            18-APR-88
+15-MAR-09 108000
+
+4444                 Ganesh               Mangalore            11-APR-21
+02-JAN-50 22800
+
+
+EMPLOYEEID           EMPLOYEENAME         EMPLOYEEADDRESS      DOB
+-------------------- -------------------- -------------------- ---------
+DOJ       SALARY
+--------- --------------------
+5555                 Chethan              Lucknow              18-DEC-97
+11-AUG-34 274800
+
+
+SQL>
+
+SQL>
