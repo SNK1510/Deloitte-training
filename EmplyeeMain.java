@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 class EmplyeeVo
 {
-  int empid;
+  int empid;`
   String empname;
   double annualincome;
    double incometax;
